@@ -5,35 +5,97 @@
     Page</button>&nbsp;&nbsp;
 <button type="button" class="btn btn-secondary"
     onClick="window.location.href='https://github.com/MingyaoLiu/SVG-Polygon-Util'">Contribute on Github</button>
-<hr />
+
 <div class="container">
+
     <div class="row">
-        <div class="col-sm">
-            <p>canvasWidth</p>
-            <input [(ngModel)]="polyObj.canvasWidth" placeholder="Canvas Width" (ngModelChange)="onChange($event)" />
-            <p>canvasHeight (&lt; Width)</p>
-            <input [(ngModel)]="polyObj.canvasHeight" placeholder="Canvas Height" (ngModelChange)="onChange($event)" />
-            <p>edgeCount</p>
-            <input [(ngModel)]="polyObj.edgeCount" placeholder="Edge Count" (ngModelChange)="onChange($event)" />
-        </div>
-        <div class="col-sm">
-            <p>width</p>
-            <input [(ngModel)]="polyObj.width" placeholder="Width" (ngModelChange)="onChange($event)" />
-            <p>height</p>
-            <input [(ngModel)]="polyObj.height" placeholder="Height" (ngModelChange)="onChange($event)" />
-            <p>rotationDeg</p>
-            <input [(ngModel)]="polyObj.rotationDeg" placeholder="Rotation Deg" (ngModelChange)="onChange($event)" />
-        </div>
-        <div class="col-sm">
-            <p>strokeWidth</p>
-            <input [(ngModel)]="polyObj.strokeWidth" placeholder="Stroke Size" (ngModelChange)="onChange($event)" />
-            <p>rotate</p>
-            <input [(ngModel)]="polyObj.rotate" type="checkbox" (ngModelChange)="onChange($event)" />
+        <div *ngFor="let options of polyObjArr" style="padding: 10px">
+            <hr />
+            <label>{{polyObj[options].label}}:&nbsp;</label>
+            <br />
+            <input [(ngModel)]="polyObj[options].value" type="{{polyObj[options].inputType}}"
+                placeholder="{{polyObj[options].label}}" (ngModelChange)="onChange($event)" />
         </div>
     </div>
+
+    <!-- 
+    <div class="row">
+        <div class="col-xs" style="padding: 10px">
+            <hr />
+            <label>Canvas Width:&nbsp;</label>
+            <br />
+            <input [(ngModel)]="polyObj.canvasWidth" placeholder="Canvas Width" (ngModelChange)="onChange($event)" />
+            <hr />
+            <label>Canvas Height:&nbsp;</label>
+            <br />
+            <input [(ngModel)]="polyObj.canvasHeight" placeholder="Canvas Height" (ngModelChange)="onChange($event)" />
+            <hr />
+            <label>Edge Count:&nbsp;</label>
+            <br />
+            <input [(ngModel)]="polyObj.edgeCount" placeholder="Edge Count" (ngModelChange)="onChange($event)" />
+        </div>
+        <div class="col-xs" style="padding: 10px">
+            <hr />
+            <label>Canvas Color:&nbsp;</label>
+            <br />
+            <input type="color" [(ngModel)]="polyObj.canvasColor" placeholder="Canvas Color"
+                (ngModelChange)="onChange($event)" />
+            <hr />
+            <label>Fill Color:&nbsp;</label>
+            <br />
+            <input type="color" [(ngModel)]="polyObj.fillColor" placeholder="Poly Fill Color"
+                (ngModelChange)="onChange($event)" />
+            <hr />
+            <label>Stroke Color:&nbsp;</label>
+            <br />
+            <input type="color" [(ngModel)]="polyObj.strokeColor" placeholder="Poly Stroke Color"
+                (ngModelChange)="onChange($event)" />
+        </div>
+
+        <div class="col-xs" style="padding: 10px">
+            <hr />
+            <label>Width:&nbsp;</label>
+            <br />
+            <input [(ngModel)]="polyObj.width" placeholder="Width" (ngModelChange)="onChange($event)" />
+            <hr />
+            <label>Height:&nbsp;</label>
+            <br />
+            <input [(ngModel)]="polyObj.height" placeholder="Height" (ngModelChange)="onChange($event)" />
+            <hr />
+            <label>Rotation Degree:&nbsp;</label>
+            <br />
+            <input [(ngModel)]="polyObj.rotationDeg" placeholder="Rotation Deg" (ngModelChange)="onChange($event)" />
+        </div>
+        <div class="col-xs" style="padding: 10px">
+            <hr />
+            <label>Stroke Width:&nbsp;</label>
+            <br />
+            <input [(ngModel)]="polyObj.strokeWidth" placeholder="Stroke Size" (ngModelChange)="onChange($event)" />
+            <hr />
+            <label>Infinite Rotate:&nbsp;</label>
+            <br />
+            <input [(ngModel)]="polyObj.rotate" type="checkbox" (ngModelChange)="onChange($event)" />
+            <hr />
+            <label>Fit In Canvas:&nbsp;</label>
+            <br />
+            <input [(ngModel)]="polyObj.fitInAll" type="checkbox" (ngModelChange)="onChange($event)" />
+        </div>
+    </div> -->
 </div>
 
 
+<hr />
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+    [attr.viewBox]="'0 0, ' + polyObj.canvasWidth.value + ' ' + polyObj.canvasHeight.value">
+
+    <polygon [attr.points]="rectPath" [attr.fill]="polyObj.canvasColor.value" />
+
+    <polygon [ngClass]="{'svgTurn': polyObj.rotate.value === true}" [style.transform-origin]="getTransformOrigin()"
+        [attr.fill]="polyObj.fillColor.value" [attr.points]="generatedPoints"
+        [attr.stroke-width]="polyObj.strokeWidth.value" [attr.stroke]="polyObj.strokeColor.value" />
+
+</svg>
 <hr />
 <div>
     &lt;svg viewBox=&quot;0 0, {{polyObj.canvasWidth}} {{polyObj.canvasHeight}}&quot;&gt; &lt;polygon
@@ -41,18 +103,3 @@
     /&gt;
     &lt;polygon fill=&quot;red&quot; points=&quot;{{ generatedPoints }}&quot; /&gt; &lt;/svg&gt;
 </div>
-<hr />
-
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-    [attr.viewBox]="'0 0, ' + polyObj.canvasWidth.toString() + ' ' + polyObj.canvasHeight.toString()">
-
-    <polygon [attr.points]="rectPath" fill="black" />
-
-    <polygon [ngClass]="{'svgTurn': polyObj.rotate === true}" [style.transform-origin]="getTransformOrigin()" fill="red"
-        [attr.points]="generatedPoints" [attr.stroke-width]="polyObj.strokeWidth" stroke="yellow" />
-
-
-    <!-- <circle fill="#FFF" cx="200" cy="75" r="20" /> -->
-    <!-- <polygon fill="transparent" stroke="#FFF" stroke-width="5px"
-        points="200 0.0000000000, 264.9519052839 37.5000000000, 264.9519052839 112.5000000000, 200 150.0000000000, 129.9038105677 112.5000000000, 129.9038105677 37.5000000000" /> -->
-</svg>

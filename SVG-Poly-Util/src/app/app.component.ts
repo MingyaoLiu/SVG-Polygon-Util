@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../environments/environment'
 
 @Component({
     selector: 'app-root',
@@ -10,7 +11,10 @@ export class AppComponent implements OnInit {
 
     constructor() { }
 
+    version = '';
     ngOnInit() {
-
+        if (environment.production === true) {
+            this.version = environment.version.toString();
+        }
     }
 }

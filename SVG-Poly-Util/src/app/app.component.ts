@@ -12,6 +12,9 @@ export class AppComponent implements OnInit {
     constructor() { }
 
     version = '';
+
+    title = 'SVG Polygon Utility';
+
     ngOnInit() {
         if (environment.production === true) {
             this.version = environment.version.toString();

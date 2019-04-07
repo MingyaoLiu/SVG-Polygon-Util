@@ -7,4 +7,4 @@ https://mingyaoliu.github.io/SVG-Polygon-Util/home
 
 # Use Angular CLI to build
 
-ng build --prod --base-href SVG-Polygon-Util
+ng build --prod --base-href /SVG-Polygon-Util/

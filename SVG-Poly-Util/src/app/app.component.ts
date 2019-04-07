@@ -48,8 +48,9 @@ export class AppComponent implements OnInit {
         },
         rotate: {
             label: 'Rotate Poly',
-            inputType: 'checkbox',
-            value: true
+            // Checkbox not working with nested obj model binding, use number 0, 1 to represent True False.
+            inputType: 'number',
+            value: 1
         },
         rotationDeg: {
             label: 'Rotate Transform Degree',
@@ -58,8 +59,8 @@ export class AppComponent implements OnInit {
         },
         fitInAll: {
             label: 'Fit Poly in Canvas',
-            inputType: 'checkbox',
-            value: true
+            inputType: 'number',
+            value: 1
         },
         transformOriginY: {
             label: 'Transform Origin Y',
@@ -67,6 +68,7 @@ export class AppComponent implements OnInit {
             value: 222
         },
     };
+
     polyObjArr = Object.keys(this.polyObj);
 
 
@@ -75,11 +77,12 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.calculatePointsFromCenter();
-        console.log(this.polyObjArr);
+        // this.polyObj.rotate.value = true;
     }
 
 
     onChange(event) {
+        console.log(event)
         this.rectPath = '0 0, 0 ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + 0;
         this.calculatePointsFromCenter();
         this.getTransformOrigin();
@@ -94,7 +97,7 @@ export class AppComponent implements OnInit {
 
         const centerAngle = 2 / this.polyObj.edgeCount.value * Math.PI;
         let r = (this.polyObj.canvasHeight.value - 2 * this.polyObj.strokeWidth.value) / 2;
-        if (!this.polyObj.fitInAll && this.polyObj.edgeCount.value % 2 !== 0) {
+        if (this.polyObj.fitInAll.value <= 0 && this.polyObj.edgeCount.value % 2 !== 0) {
             r = (this.polyObj.canvasHeight.value - 2 * this.polyObj.strokeWidth.value) / (1 + Math.cos(centerAngle / 2));
         }
         this.polyObj.transformOriginY.value = r + this.polyObj.strokeWidth.value;

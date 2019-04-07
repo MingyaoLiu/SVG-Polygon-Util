@@ -14,12 +14,7 @@
             <label>{{polyObj[options].label}}:&nbsp;</label>
             <br />
             <input [attr.type]="polyObj[options].inputType" [(ngModel)]="polyObj[options].value"
-                placeholder="{{polyObj[options].label}}" ng-true-value="'YES'" ng-false-value="'NO'"
-                (ngModelChange)="onChange($event)" />
-
-
-
-
+                placeholder="{{polyObj[options].label}}" (ngModelChange)="onChange($event)" />
         </div>
     </div>
 

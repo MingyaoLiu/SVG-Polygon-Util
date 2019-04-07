@@ -8,7 +8,8 @@ const routes: Routes = [
 
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: UtilPageComponent },
-    { path: 'testPage', component: TestPageComponent }
+    { path: 'testPage', component: TestPageComponent },
+    { path: 'SVG-Polygon-Util', redirectTo: '/home' },
 
 ];
 

@@ -1,0 +1,43 @@
+&nbsp;&nbsp;
+<button type="button" class="btn btn-primary"
+    onClick="window.location.href='https://mingyaoliu.github.io/SVG-Polygon-Util'">Refresh This
+    Page</button>&nbsp;&nbsp;
+<button type="button" class="btn btn-secondary"
+    onClick="window.location.href='https://github.com/MingyaoLiu/SVG-Polygon-Util'">Contribute on
+    Github</button>&nbsp;&nbsp;
+<button type="button" class="btn btn-warning" routerLink="/testPage">Test Page No Entry</button>
+
+<div class="container">
+
+    <div class="row">
+        <div *ngFor="let options of polyObjArr" style="padding: 10px">
+            <hr />
+            <label>{{polyObj[options].label}}:&nbsp;</label>
+            <br />
+            <input [attr.type]="polyObj[options].inputType" [(ngModel)]="polyObj[options].value"
+                placeholder="{{polyObj[options].label}}" (ngModelChange)="onChange($event)" />
+        </div>
+    </div>
+
+</div>
+
+
+<hr />
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+    [attr.viewBox]="'0 0, ' + polyObj.canvasWidth.value + ' ' + polyObj.canvasHeight.value">
+
+    <polygon [attr.points]="rectPath" [attr.fill]="polyObj.canvasColor.value" />
+
+    <polygon [ngClass]="{'svgTurn': polyObj.rotate.value > 0}" [style.transform-origin]="getTransformOrigin()"
+        [attr.fill]="polyObj.fillColor.value" [attr.points]="generatedPoints"
+        [attr.stroke-width]="polyObj.strokeWidth.value" [attr.stroke]="polyObj.strokeColor.value" />
+
+</svg>
+<hr />
+<div>
+    &lt;svg viewBox=&quot;0 0, {{polyObj.canvasWidth}} {{polyObj.canvasHeight}}&quot;&gt; &lt;polygon
+    points=&quot;{{ rectPath }}&quot; fill=&quot;black&quot;
+    /&gt;
+    &lt;polygon fill=&quot;red&quot; points=&quot;{{ generatedPoints }}&quot; /&gt; &lt;/svg&gt;
+</div>

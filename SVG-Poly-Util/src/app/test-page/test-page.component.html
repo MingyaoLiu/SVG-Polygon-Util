@@ -1,0 +1,31 @@
+&nbsp;&nbsp;
+<button type="button" class="btn btn-warning" routerLink="/home">Go Back To Utility</button>
+<div class="container">
+
+    <div class="row">
+        <div *ngFor="let objVal of objArray" style="padding: 10px">
+            <hr />
+            <label>{{obj[objVal].label}} input type ({{obj[objVal].inputType}}):&nbsp;</label>
+            <br />
+            <input [attr.type]="obj[objVal].inputType" [(ngModel)]="obj[objVal].value"
+                placeholder="{{obj[objVal].label}}" (ngModelChange)="onChange($event)" />
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div *ngFor="let objVal of obj2Array" style="padding: 10px">
+            <hr />
+            <label>Test Group:&nbsp;</label>
+            <br />
+            <input type="checkbox" [(ngModel)]="obj2[objVal]" (ngModelChange)="onChange($event)" />
+        </div>
+    </div>
+
+    <hr />
+
+    <div>
+        {{ someInfo }}
+    </div>
+
+</div>

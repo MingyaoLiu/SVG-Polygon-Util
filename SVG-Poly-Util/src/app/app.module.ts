@@ -4,10 +4,14 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TestPageComponent } from './test-page/test-page.component';
+import { UtilPageComponent } from './util-page/util-page.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        TestPageComponent,
+        UtilPageComponent
     ],
     imports: [
         BrowserModule,

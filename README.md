@@ -2,7 +2,7 @@
 A simple SVG polygon generator
 
 # Online Demo
-https://mingyaoliu.github.io/SVG-Polygon-Util
+https://mingyaoliu.github.io/SVG-Polygon-Util/home
 
 
 # Use Angular CLI to build

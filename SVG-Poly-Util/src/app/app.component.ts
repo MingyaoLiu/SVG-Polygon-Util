@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
         if (environment.production === true) {
             this.version += '_DEV';
         }
-        const currentVersion = this.getLocalStorageVersion();
+        this.getLocalStorageVersion();
 
     }
 

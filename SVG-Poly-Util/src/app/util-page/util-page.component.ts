@@ -71,27 +71,33 @@ export class UtilPageComponent implements OnInit {
     polyObjArr = Object.keys(this.polyObj);
 
 
-    rectPath = '0 0, 0 ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + 0;
+    rectPath = '0 0, 0 200, 400 200, 400 0';
     generatedPoints = '';
 
     ngOnInit() {
-        this.calculatePointsFromCenter();
         // this.polyObj.rotate.value = true;
         this.loadLocalStorageSave();
+        this.calculatePointsFromCenter();
+        this.getTransformOrigin();
     }
 
     private loadLocalStorageSave() {
         try {
             const storedData = localStorage.getItem('poly_data');
             this.polyObj = JSON.parse(storedData);
+            this.rectPath = '0 0, 0 ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + 0;
         } catch (err) {
             console.log('Read JSON saved failed: ', err);
-            localStorage.setItem('poly_data', JSON.stringify(this.polyObj));
+            this.saveObjToLocalStorage();
         }
     }
 
     private saveObjToLocalStorage() {
-        localStorage.setItem('poly_data', JSON.stringify(this.polyObj));
+        try {
+            localStorage.setItem('poly_data', JSON.stringify(this.polyObj));
+        } catch (err) {
+            console.log('Save JSON string failed: ', err);
+        }
     }
 
     private onChange(event) {

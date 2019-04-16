@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     private getLocalStorageVersion() {
         try {
             const appData = localStorage.getItem('app_data');
-            if (appData == null || appData === 'null' || JSON.parse(appData).version <= environment.version) {
+            if (appData == null || appData === 'null' || JSON.parse(appData).version < environment.version) {
                 console.log('new app or old version');
                 this.setNewAppData();
             }

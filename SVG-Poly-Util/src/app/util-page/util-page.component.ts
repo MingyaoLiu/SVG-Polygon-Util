@@ -88,12 +88,15 @@ export class UtilPageComponent implements OnInit {
             console.log('Read JSON saved failed: ', err);
             localStorage.setItem('poly_data', JSON.stringify(this.polyObj));
         }
+    }
 
+    private saveObjToLocalStorage() {
+        localStorage.setItem('poly_data', JSON.stringify(this.polyObj));
     }
 
     private onChange(event) {
         console.log(event);
-        localStorage.setItem('poly_data', JSON.stringify(this.polyObj));
+        this.saveObjToLocalStorage();
         this.rectPath = '0 0, 0 ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + 0;
         this.calculatePointsFromCenter();
         this.getTransformOrigin();

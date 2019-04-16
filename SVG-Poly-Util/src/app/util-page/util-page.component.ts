@@ -119,11 +119,13 @@ export class UtilPageComponent implements OnInit {
         let r = (this.polyObj.canvasHeight.value - 2 * this.polyObj.strokeWidth.value) / 2;
         if (this.polyObj.fitInAll.value <= 0 && this.polyObj.edgeCount.value % 2 !== 0) {
             r = (this.polyObj.canvasHeight.value - 2 * this.polyObj.strokeWidth.value) / (1 + Math.cos(centerAngle / 2));
+        } else if (this.polyObj.fitInAll.value <= 0 && this.polyObj.edgeCount.value % 2 === 0) {
+            r = Math.sin(Math.PI / 2) * ((this.polyObj.canvasHeight.value - 2 * this.polyObj.strokeWidth.value) / 2) / Math.sin(Math.PI / 2 - centerAngle / 2)
         }
-        this.polyObj.transformOriginY.value = r + this.polyObj.strokeWidth.value;
         const centerX: number = this.polyObj.canvasWidth.value / 2;
         const centerY: number = this.polyObj.edgeCount.value % 2 === 0 ? this.polyObj.canvasHeight.value / 2 : r + this.polyObj.strokeWidth.value;
-        let leftPointPath = '' + this.polyObj.canvasWidth.value / 2 + ' ' + this.polyObj.strokeWidth.value;
+        this.polyObj.transformOriginY.value = centerY;
+        let leftPointPath = '' + centerX + ' ' + (centerY - r);
         let rightPointPath = '';
 
         for (let i = 0; i < Math.floor((this.polyObj.edgeCount.value - 1) / 2); i++) {
@@ -134,8 +136,9 @@ export class UtilPageComponent implements OnInit {
             rightPointPath = ', ' + (centerX * 2 - pointX) + ' ' + pointY + '' + rightPointPath;
         }
         if (this.polyObj.edgeCount.value % 2 === 0) {
-            leftPointPath += ', ' + this.polyObj.canvasWidth.value / 2 + ' ' + (this.polyObj.canvasHeight.value - this.polyObj.strokeWidth.value);
+            leftPointPath += ', ' + centerX + ' ' + (centerY + r);
         }
         this.generatedPoints = leftPointPath + rightPointPath;
     }
+
 }

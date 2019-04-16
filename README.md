@@ -9,7 +9,7 @@ https://mingyaoliu.github.io/SVG-Polygon-Util/home
 
 ng build --prod --base-href /SVG-Polygon-Util/
 
-or run: npm build
+or run: npm run build
 
 # Testing
 

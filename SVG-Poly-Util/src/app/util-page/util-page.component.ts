@@ -77,22 +77,34 @@ export class UtilPageComponent implements OnInit {
     ngOnInit() {
         this.calculatePointsFromCenter();
         // this.polyObj.rotate.value = true;
+        this.loadLocalStorageSave();
     }
 
+    private loadLocalStorageSave() {
+        try {
+            const storedData = localStorage.getItem('poly_data');
+            this.polyObj = JSON.parse(storedData);
+        } catch (err) {
+            console.log('Read JSON saved failed: ', err);
+            localStorage.setItem('poly_data', JSON.stringify(this.polyObj));
+        }
 
-    onChange(event) {
-        console.log(event)
+    }
+
+    private onChange(event) {
+        console.log(event);
+        localStorage.setItem('poly_data', JSON.stringify(this.polyObj));
         this.rectPath = '0 0, 0 ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + 0;
         this.calculatePointsFromCenter();
         this.getTransformOrigin();
     }
 
 
-    getTransformOrigin() {
+    private getTransformOrigin() {
         return '' + this.polyObj.canvasWidth.value / 2 + 'px ' + this.polyObj.transformOriginY.value + 'px';
     }
 
-    calculatePointsFromCenter() {
+    private calculatePointsFromCenter() {
 
         const centerAngle = 2 / this.polyObj.edgeCount.value * Math.PI;
         let r = (this.polyObj.canvasHeight.value - 2 * this.polyObj.strokeWidth.value) / 2;

@@ -83,7 +83,12 @@ export class UtilPageComponent implements OnInit {
 
     private loadLocalStorageSave() {
         try {
-            const storedData = localStorage.getItem('poly_data');
+            let storedData = localStorage.getItem('poly_data');
+            if (storedData == null || storedData === 'null') {
+                console.log('first time loading no local storage data!');
+                this.saveObjToLocalStorage();
+                storedData = localStorage.getItem('poly_data');
+            }
             this.polyObj = JSON.parse(storedData);
             this.rectPath = '0 0, 0 ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + 0;
         } catch (err) {
@@ -120,7 +125,7 @@ export class UtilPageComponent implements OnInit {
         if (this.polyObj.fitInAll.value <= 0 && this.polyObj.edgeCount.value % 2 !== 0) {
             r = (this.polyObj.canvasHeight.value - 2 * this.polyObj.strokeWidth.value) / (1 + Math.cos(centerAngle / 2));
         } else if (this.polyObj.fitInAll.value <= 0 && this.polyObj.edgeCount.value % 2 === 0) {
-            r = Math.sin(Math.PI / 2) * ((this.polyObj.canvasHeight.value - 2 * this.polyObj.strokeWidth.value) / 2) / Math.sin(Math.PI / 2 - centerAngle / 2)
+            r = Math.sin(Math.PI / 2) * ((this.polyObj.canvasHeight.value - 2 * this.polyObj.strokeWidth.value) / 2) / Math.sin(Math.PI / 2 - centerAngle / 2);
         }
         const centerX: number = this.polyObj.canvasWidth.value / 2;
         const centerY: number = this.polyObj.edgeCount.value % 2 === 0 ? this.polyObj.canvasHeight.value / 2 : r + this.polyObj.strokeWidth.value;

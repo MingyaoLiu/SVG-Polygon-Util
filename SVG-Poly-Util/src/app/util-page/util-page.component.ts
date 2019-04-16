@@ -9,7 +9,7 @@ export class UtilPageComponent implements OnInit {
 
     constructor() { }
 
-    polyObj = {
+    reservedObj = {
         canvasWidth: {
             label: 'Canvas Width',
             inputType: 'number',
@@ -68,6 +68,8 @@ export class UtilPageComponent implements OnInit {
         },
     };
 
+    polyObj = this.reservedObj;
+
     polyObjArr = Object.keys(this.polyObj);
 
 
@@ -86,20 +88,20 @@ export class UtilPageComponent implements OnInit {
             let storedData = localStorage.getItem('poly_data');
             if (storedData == null || storedData === 'null') {
                 console.log('first time loading no local storage data!');
-                this.saveObjToLocalStorage();
+                this.saveObjToLocalStorage(this.reservedObj);
                 storedData = localStorage.getItem('poly_data');
             }
             this.polyObj = JSON.parse(storedData);
             this.rectPath = '0 0, 0 ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + 0;
         } catch (err) {
             console.log('Read JSON saved failed: ', err);
-            this.saveObjToLocalStorage();
+            this.saveObjToLocalStorage(this.reservedObj);
         }
     }
 
-    private saveObjToLocalStorage() {
+    private saveObjToLocalStorage(obj: any) {
         try {
-            localStorage.setItem('poly_data', JSON.stringify(this.polyObj));
+            localStorage.setItem('poly_data', JSON.stringify(obj));
         } catch (err) {
             console.log('Save JSON string failed: ', err);
         }
@@ -107,7 +109,7 @@ export class UtilPageComponent implements OnInit {
 
     private onChange(event) {
         console.log(event);
-        this.saveObjToLocalStorage();
+        this.saveObjToLocalStorage(this.polyObj);
         this.rectPath = '0 0, 0 ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + 0;
         this.calculatePointsFromCenter();
         this.getTransformOrigin();

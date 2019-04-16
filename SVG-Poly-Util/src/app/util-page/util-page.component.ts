@@ -109,7 +109,7 @@ export class UtilPageComponent implements OnInit {
     }
 
 
-    private getTransformOrigin() {
+    getTransformOrigin() {
         return '' + this.polyObj.canvasWidth.value / 2 + 'px ' + this.polyObj.transformOriginY.value + 'px';
     }
 

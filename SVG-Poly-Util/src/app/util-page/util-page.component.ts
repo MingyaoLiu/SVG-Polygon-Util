@@ -109,10 +109,10 @@ export class UtilPageComponent implements OnInit {
 
     private onChange(event) {
         console.log(event);
-        this.saveObjToLocalStorage(this.polyObj);
         this.rectPath = '0 0, 0 ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + this.polyObj.canvasHeight.value + ', ' + this.polyObj.canvasWidth.value + ' ' + 0;
         this.calculatePointsFromCenter();
         this.getTransformOrigin();
+        this.saveObjToLocalStorage(this.polyObj);
     }
 
 

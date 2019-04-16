@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -16,8 +16,39 @@ export class AppComponent implements OnInit {
     title = 'SVG Polygon Utility';
 
     ngOnInit() {
+        this.version = environment.version.toString();
+
         if (environment.production === true) {
-            this.version = environment.version.toString();
+            this.version += '_DEV';
+        }
+        const currentVersion = this.getLocalStorageVersion();
+
+    }
+
+
+    private getLocalStorageVersion() {
+        try {
+            const appData = localStorage.getItem('app_data');
+            if (appData == null || appData === 'null' || JSON.parse(appData).version <= environment.version) {
+                console.log('new app or old version');
+                this.setNewAppData();
+            }
+        } catch (err) {
+            console.log('Read app data JSON failed: ', err);
+            this.setNewAppData();
         }
     }
+
+    private setNewAppData() {
+        try {
+            const newAppData = {
+                version: environment.version
+            };
+            localStorage.setItem('app_data', JSON.stringify(newAppData));
+            localStorage.setItem('poly_data', null);
+        } catch (err) {
+            console.log('Save JSON string failed: ', err);
+        }
+    }
+
 }

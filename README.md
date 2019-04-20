@@ -9,6 +9,7 @@ https://mingyaoliu.github.io/SVG-Polygon-Util/
 
 # What I accomplished
 Primarily I made this utility to help me with creating this loading gif for my personal website. It worked.
+
 ![Cool loading SVG](https://media.giphy.com/media/j5oI6f1M6luIUFbZ0l/giphy.gif)
 
 

@@ -2,7 +2,7 @@
 .anim1 > circle {
     transform: scale(1);
     transform-origin: 200px 100px;
-    animation-duration: 10s;
+    animation-duration: 15s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
@@ -11,7 +11,7 @@
 .anim1 > polygon {
     transform: scale(1);
     transform-origin: 200px 100px;
-    animation-duration: 10s;
+    animation-duration: 15s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
@@ -22,16 +22,16 @@
     @keyframes zoomInOut {
         0% {
             transform: scaleY(1.1) scaleX(1.1);
+            opacity: 0;
         }
-        10% {
+        5% {
             transform: scaleY(1.2) scaleX(1.2);
         }
-        20% {
+        10% {
             transform: scaleY(1) scaleX(1);
+            opacity: 1;
         }
-        30% {
-
-        }
+        
         34% {
             transform: scale(1);
         }
@@ -113,17 +113,18 @@
         69% {
             transform: rotate(-360deg) scale(0.54);
         }
-        70% {
-
-        }
-        80% {
-            
-        }
-        90% {
-
-        }
-        100% {
+        83% {
             transform: rotate(-360deg) scale(0.54);
+        }
+        85% {
+            transform: rotate(-360deg) scale(0.54);
+        }
+        95% {
+            transform: rotate(-100deg) scale(0.54);
+        }
+
+        100% {
+            transform: rotate(-100deg) scale(0.54);
             opacity: 1;
         }
     }
@@ -220,13 +221,17 @@
         69% {
             transform: scale(0.54);
         }
-        
+        83% {
+            opacity: 1
+        }
         90% {
+            opacity: 0
 
         }
         100% {
             transform: scale(0.54);
             stroke-dashoffset: 0;
+            opacity: 0
         }
     }
 }
@@ -268,21 +273,19 @@
             transform: rotate(-360deg) scale(0.7);
         }
 
-
-        60% {
-            
-        }
-        70% {
-
-        }
-        80% {
-            
-        }
-        90% {
-
-        }
-        100% {
+        83% {
             transform: rotate(-360deg) scale(0.7);
+        }
+        85% {
+            transform: rotate(-360deg) scale(0.7);
+        }
+        95% {
+            transform: rotate(-150deg) scale(0.7);
+        }
+
+
+        100% {
+            transform: rotate(-150deg) scale(0.7);
             opacity: 1;
         }
     }
@@ -381,15 +384,17 @@
         70% {
 
         }
-        80% {
-            
+        83% {
+            opacity: 1
         }
         90% {
+            opacity: 0
 
         }
         100% {
             transform: scale(0.7);
             stroke-dashoffset: 0;
+            opacity: 0
         }
 
 
@@ -397,3 +402,100 @@
 }
 
 
+
+
+.dot3-1 {
+    animation-name: dot31;
+    transform: rotate(0deg) scale(1);
+    opacity: 0;
+    @keyframes dot31 {
+        0% {
+            
+        }
+
+        69% {
+            opacity: 0;
+        }
+        74% {
+            transform: rotate(0deg) scale(1);
+            opacity: 1;
+        }
+        78.5% {
+            transform: rotate(-180deg) scale(1);
+        }
+        83% {
+            transform: rotate(-360deg) scale(1);
+        }
+
+        85% {
+            
+            transform: rotate(-360deg) scale(1);
+        }
+        95% {
+            transform: rotate(-200deg) scale(1);
+        }
+
+        60% {
+            
+        }
+        70% {
+
+        }
+        80% {
+            
+        }
+        90% {
+
+        }
+        100% {
+            transform: rotate(-200deg) scale(1);
+            opacity: 1;
+        }
+    }
+}
+.circle3-1 {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    transform: rotateZ(90deg) rotateY(180deg) scale(1);
+    animation-name: circle31;
+    
+    @keyframes circle31 {
+        0% {
+        transform: rotateZ(90deg) rotateY(180deg) scale(1);
+        }
+
+        25% {
+        }
+        34% {
+            transform: rotateZ(90deg) rotateY(180deg) scale(1);
+        }
+        35% {
+            
+        }
+        44% {
+        }
+        45% {
+
+        }
+        74% {
+            
+            stroke-dashoffset: 1000;
+        }
+        84% {
+
+            stroke-dashoffset: 500;
+        }
+        94% {
+            stroke-dashoffset: 0;
+            
+        }
+        90% {
+
+        }
+        100% {
+
+            transform: rotateZ(90deg) rotateY(180deg) scale(1);
+            stroke-dashoffset: 0;
+        }
+    }
+}
